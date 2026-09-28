@@ -1,0 +1,22 @@
+window.CARDS = [
+{id:"shepherd",name:"Shepherd",cost:3,hp:520,dmg:55,range:34,speed:52,rate:.85,color:"#e8d6a2",desc:"Steady close fighter"},
+{id:"disciple",name:"Disciple",cost:4,hp:390,dmg:85,range:150,speed:35,rate:1.15,color:"#79b7ff",desc:"Ranged supporter"},
+{id:"guardian",name:"Temple Guard",cost:5,hp:900,dmg:75,range:38,speed:25,rate:1.05,color:"#c7c7d4",desc:"Strong defender"},
+{id:"light",name:"Light",cost:2,hp:170,dmg:125,range:120,speed:70,rate:1.3,color:"#ffe27a",desc:"Fast attacker"},
+{id:"apostle",name:"Apostle",cost:4,hp:480,dmg:105,range:110,speed:42,rate:1,color:"#f0c58a",desc:"Powerful teacher"},
+{id:"prayer",name:"Prayer",cost:3,hp:260,dmg:150,range:170,speed:48,rate:1.5,color:"#d7a4ff",desc:"Ranged blessing"},
+{id:"psalmist",name:"Psalmist",cost:3,hp:350,dmg:65,range:180,speed:38,rate:.8,color:"#a8e6cf",desc:"Rapid support"},
+{id:"prophet",name:"Prophet",cost:5,hp:620,dmg:145,range:155,speed:30,rate:1.35,color:"#ffd27d",desc:"Heavy ranged unit"},
+{id:"missionary",name:"Missionary",cost:2,hp:280,dmg:70,range:75,speed:65,rate:.7,color:"#f2f2f2",desc:"Quick deploy"},
+{id:"deacon",name:"Deacon",cost:3,hp:650,dmg:50,range:35,speed:32,rate:.65,color:"#c9b79c",desc:"Durable helper"},
+{id:"evangelist",name:"Evangelist",cost:4,hp:430,dmg:120,range:130,speed:45,rate:1.2,color:"#ffad66",desc:"Strong ranged fighter"},
+{id:"faithful",name:"Faithful",cost:6,hp:1100,dmg:95,range:40,speed:20,rate:1.1,color:"#d9d9d9",desc:"Massive defender"},
+{id:"warrior",name:"Faith Warrior",cost:5,hp:780,dmg:130,range:42,speed:34,rate:1,color:"#9eb6d8",desc:"Front-line fighter"},
+{id:"scout",name:"Messenger",cost:1,hp:120,dmg:45,range:35,speed:95,rate:.55,color:"#b7e4c7",desc:"Very fast unit"},
+{id:"wisdom",name:"Wisdom",cost:4,hp:300,dmg:180,range:190,speed:25,rate:1.7,color:"#e9d5ff",desc:"Long-range power"},
+{id:"mercy",name:"Mercy",cost:3,hp:450,dmg:35,range:150,speed:40,rate:.5,color:"#bde0fe",desc:"Steady support"},
+{id:"builder",name:"Builder",cost:4,hp:700,dmg:60,range:38,speed:27,rate:1,color:"#d4a373",desc:"Tough tower-breaker"},
+{id:"scribe",name:"Scribe",cost:2,hp:240,dmg:90,range:165,speed:38,rate:1,color:"#fefae0",desc:"Accurate ranged unit"},
+{id:"redeemer",name:"Redeemer",cost:7,hp:1400,dmg:155,range:45,speed:18,rate:1.25,color:"#f7d488",desc:"Elite champion"},
+{id:"servant",name:"Servant",cost:1,hp:190,dmg:55,range:40,speed:75,rate:.7,color:"#d8f3dc",desc:"Cheap fast fighter"}
+];
