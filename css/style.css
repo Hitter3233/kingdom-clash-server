@@ -1,0 +1,109 @@
+*{box-sizing:border-box}
+:root{--gold:#e9c86a;--gold2:#a77724;--ink:#081019;--purple:#9d65ff}
+html,body{margin:0;width:100%;height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:#071019;color:#fff}
+body{overflow:hidden;background:radial-gradient(circle at 50% -15%,#36516a 0,#111b27 45%,#05090e 100%)}
+button{font:inherit}
+#app{position:relative;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:12px}
+#game{display:none;position:relative;width:min(1000px,100%);height:min(760px,100%);overflow:hidden;background:#142c1d;border:2px solid var(--gold);border-radius:20px;box-shadow:0 0 0 5px #0005,0 20px 70px #000d}
+#canvas{display:block;width:100%;height:100%}
+#topbar{position:absolute;z-index:5;top:12px;left:50%;transform:translateX(-50%);min-width:270px;padding:9px 16px;text-align:center;border:1px solid #e9c86a99;border-radius:14px;background:linear-gradient(180deg,#263c52ee,#0e1824ee);box-shadow:0 5px 18px #0009;font-size:14px;font-weight:900;letter-spacing:1px;text-shadow:0 2px 3px #000}
+#timer{display:inline-block;margin-left:10px;color:#ffe27a;font-variant-numeric:tabular-nums}
+#hint{margin-top:3px;color:#dce5ee;font-size:11px;font-weight:500;letter-spacing:0}
+#openDeck,#startGame,#restart{border:1px solid #ffe39a;border-radius:11px;background:linear-gradient(180deg,#f8dc86,#b98528);color:#241807;font-weight:900;cursor:pointer;box-shadow:0 4px 0 #68491b,0 8px 16px #0007;transition:transform .12s,filter .12s}
+#openDeck:hover,#startGame:hover,#restart:hover{filter:brightness(1.08);transform:translateY(-2px)}
+#openDeck{position:absolute;z-index:7;top:12px;right:12px;padding:8px 12px}
+#manaBox{position:absolute;z-index:6;bottom:105px;left:50%;transform:translateX(-50%);width:min(390px,70%);padding:7px 8px;border:1px solid #c8a9ff88;border-radius:13px;background:#0d1522e8;box-shadow:0 5px 18px #0009}
+#manaBar{height:20px;overflow:hidden;border:1px solid #ffffff33;border-radius:10px;background:#24143b}
+#manaFill{height:100%;width:50%;border-radius:9px;background:linear-gradient(90deg,#7046c7,#ad7aff,#efd8ff);box-shadow:0 0 15px #b88cff;transition:width .2s}
+#manaText{position:absolute;inset:7px 0 auto;text-align:center;font-size:12px;font-weight:900;text-shadow:0 1px 3px #000}
+#cards{position:absolute;z-index:6;bottom:11px;left:50%;transform:translateX(-50%);display:flex;gap:8px;filter:drop-shadow(0 10px 12px #0009)}
+.card{position:relative;width:112px;height:84px;padding:6px;overflow:hidden;text-align:left;color:#fff;cursor:pointer;border:2px solid #d8b75a;border-radius:12px;background:linear-gradient(155deg,#38516a,#111a27 72%);box-shadow:0 6px 14px #000b;transition:transform .15s,filter .15s,box-shadow .15s,border-color .15s}
+.card:hover{transform:translateY(-5px);filter:brightness(1.15)}
+.card.selected{outline:3px solid #fff4b0;border-color:#ffe27a;box-shadow:0 0 20px #ffe27a,0 8px 18px #000b;transform:translateY(-8px)}
+.card.disabled{opacity:.45;filter:saturate(.5)}
+.cost{position:absolute;top:4px;right:5px;width:23px;height:23px;display:grid;place-items:center;border-radius:50%;background:linear-gradient(#caa4ff,#6540a7);border:1px solid #eadbff;font-weight:900;box-shadow:0 2px 5px #0008}
+.card b{display:block;margin-top:5px;padding-right:25px;font-size:13px;text-shadow:0 1px 2px #000}
+.card small{display:block;margin-top:4px;color:#dce5ee;font-size:10px;line-height:1.15}
+#message{position:absolute;z-index:10;top:50%;left:50%;transform:translate(-50%,-50%);display:none;min-width:260px;padding:28px 38px;text-align:center;border:2px solid var(--gold);border-radius:18px;background:#101827ee;box-shadow:0 0 45px #000;backdrop-filter:blur(7px)}
+#result{margin-bottom:16px;font-size:40px;font-weight:1000;text-shadow:0 3px 8px #000}
+#restart{padding:10px 20px}
+#deckScreen{position:absolute;z-index:20;inset:0;width:min(1000px,100%);height:100%;margin:auto;padding:24px 22px;overflow:auto;border:2px solid var(--gold);border-radius:20px;background:radial-gradient(circle at 50% -10%,#31563c,#0b1710 68%,#07100b);box-shadow:0 0 35px #000a}
+#deckScreen h1{margin:0;text-align:center;font-size:clamp(25px,4vw,38px);text-shadow:0 3px 5px #000}
+#deckScreen>p{max-width:650px;margin:8px auto 0;text-align:center;color:#d8e1da;line-height:1.4}
+#deckCount{width:max-content;margin:18px auto 12px;padding:7px 14px;border:1px solid #ffe27a66;border-radius:999px;background:#101a14cc;color:#ffe27a;font-weight:900}
+#deckGrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:900px;margin:auto}
+.deckCard{min-height:86px;padding:10px;text-align:left;color:#fff;cursor:pointer;border:2px solid #52606b;border-radius:12px;background:linear-gradient(145deg,#263949,#101923);box-shadow:0 4px 10px #0007;transition:transform .15s,border-color .15s,background .15s,box-shadow .15s}
+.deckCard:hover{transform:translateY(-3px);border-color:#b9c7d3}
+.deckCard.selected{border-color:#ffe27a;background:linear-gradient(145deg,#5a4b27,#211c12);box-shadow:0 0 16px #ffe27a44,0 5px 12px #0008}
+.deckCard b{display:block;font-size:13px}.deckCard small{display:block;margin-top:5px;color:#cbd4dc;line-height:1.25}
+#startGame{display:block;margin:18px auto 8px;padding:11px 24px}
+#startGame:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+@keyframes cardIn{0%{opacity:0;transform:translateY(22px) scale(.85) rotate(-4deg)}65%{opacity:1;transform:translateY(-5px) scale(1.05) rotate(1deg)}100%{opacity:1;transform:translateY(0) scale(1) rotate(0)}}
+@keyframes cardGlow{0%{box-shadow:0 0 0 #ffe27a}40%{box-shadow:0 0 28px #ffe27a,0 0 8px #fff}100%{box-shadow:0 6px 14px #000b}}
+.card.entering{animation:cardIn .5s ease-out,cardGlow .7s ease-out}
+@media(max-width:760px){#app{padding:0}#game,#deckScreen{border-radius:0}#deckScreen{padding:18px 12px}#deckGrid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.deckCard{min-height:78px;padding:8px}.card{width:84px;height:76px}.card b{font-size:11px}.card small{font-size:9px}#manaBox{width:290px;bottom:96px}#cards{gap:5px}#topbar{min-width:225px;top:8px;padding:7px 10px;font-size:12px}#openDeck{top:8px;right:8px;padding:7px 9px}}
+@media(max-width:430px){.card{width:75px;height:70px}.card b{font-size:10px}.card small{display:none}#manaBox{width:250px}}
+
+/* Detailed game polish */
+#game:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;box-shadow:inset 0 0 70px #0007,inset 0 0 0 1px #fff2}
+.card:before,.deckCard:before{content:"";position:absolute;inset:2px;border-radius:9px;pointer-events:none;background:linear-gradient(135deg,#ffffff18,transparent 38%,#0005);opacity:.7}
+.deckCard{position:relative;overflow:hidden}
+.card{background:linear-gradient(145deg,#415e78 0%,#1c2d3e 46%,#0d151e 100%)}
+.card .cost{z-index:2}
+#manaBox:after{content:"";position:absolute;inset:-1px;border-radius:13px;pointer-events:none;box-shadow:inset 0 1px #fff3}
+
+.balance-note{
+  position:fixed;
+  left:50%;
+  bottom:8px;
+  transform:translateX(-50%);
+  z-index:20;
+  padding:5px 10px;
+  border-radius:999px;
+  background:rgba(10,18,30,.72);
+  border:1px solid rgba(255,220,120,.35);
+  color:rgba(255,245,210,.72);
+  font-size:11px;
+  pointer-events:none;
+}
+
+.mp-panel{
+  position:relative;
+  z-index:30;
+  max-width:760px;
+  margin:14px auto;
+  padding:16px;
+  border:1px solid rgba(255,220,120,.35);
+  border-radius:18px;
+  background:rgba(10,18,30,.82);
+  box-shadow:0 12px 30px rgba(0,0,0,.28);
+}
+.mp-panel h2{margin:0 0 6px}
+.mp-panel label{display:block;font-size:12px;opacity:.85;margin:10px 0}
+.mp-panel input{
+  box-sizing:border-box;
+  width:100%;
+  margin-top:5px;
+  padding:10px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.08);
+  color:inherit;
+}
+.mp-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mp-actions input{width:130px;margin:0}
+.mp-actions button,.mp-panel>button{cursor:pointer}
+.room-box{
+  margin-top:12px;
+  padding:12px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  text-align:center;
+}
+.room-box strong{
+  display:block;
+  font-size:28px;
+  letter-spacing:5px;
+  margin:4px 0;
+}
+.room-box span{font-size:12px;opacity:.75}
