@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="theme-color" content="#142c1d">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kingdom Clash">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.json">
+<title>Kingdom Clash</title>
+<link rel="stylesheet" href="./css/style.css?v=7">
+<link rel="icon" type="image/png" href="assets/icon-192.png"></head>
+<body>
+<div id="app">
+  <div id="deckScreen">
+    <h1>✝ Kingdom Deck Builder</h1>
+    <p>Select exactly <b>8 cards</b>. You will have 4 in your hand at a time.</p>
+    <div id="deckCount">0 / 8 selected</div>
+    <div id="deckGrid"></div>
+    <button id="startGame">Start Battle</button>
+  </div>
+
+  <div id="game">
+    
+<section id="multiplayerPanel" class="mp-panel">
+  <h2>Online 1v1</h2>
+  <p id="mpStatus">Not connected</p>
+  <label>
+    WebSocket Server
+    <input id="serverUrl" value="wss://YOUR-SERVER.onrender.com" />
+  </label>
+  <button id="connectMp">Connect</button>
+
+  <div class="mp-actions">
+    <button id="createRoom">Create Game</button>
+    <input id="joinCode" maxlength="5" placeholder="ROOM CODE" />
+    <button id="joinRoom">Join Game</button>
+  </div>
+
+  <div class="room-box">
+    <div>Your room</div>
+    <strong id="roomCode">-----</strong>
+    <span id="roomMessage">Create or join a room.</span>
+  </div>
+</section>
+
+<canvas id="canvas" width="1000" height="760"></canvas>
+    <div id="topbar">KINGDOM CLASH <span id="timer">3:00</span><div id="hint">Choose a card, then click a lane on your side.</div></div>
+    <button id="openDeck">Deck</button>
+    <div id="manaBox"><div id="manaBar"><div id="manaFill"></div></div><div id="manaText">5 / 10 BLESSING</div></div>
+    <div id="cards"></div>
+    <div id="message"><div class="balance-note">Player Blessing regenerates faster than the bot.</div>
+<div id="result"></div><button id="restart">Play Again</button></div>
+  </div>
+</div>
+<script src="js/cards.js"></script>
+<script src="js/deck.js"></script>
+<script src="js/game.js?v=mp1"></script>
+<script src="js/ui.js?v=mp1"></script>
+<script src="js/multiplayer.js"></script>
+</body>
+</html>
